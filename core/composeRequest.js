@@ -8,7 +8,7 @@ function composeRequest(request, arrayOfPreviousResponses) {
           request[key]._path
         );
       } else {
-        return composeRequest(request[key], arrayOfPreviousResponses);
+        request[key] = composeRequest(request[key], arrayOfPreviousResponses);
       }
     }
   }

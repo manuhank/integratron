@@ -1,29 +1,37 @@
-function airtable(argumentos) {
+function airtable(request) {
   var options = {
     headers: {
-      Authorization: "Bearer " + argumentos.token
-    }
+      Authorization: "Bearer " + request.token
+    },
+    muteHttpExceptions: true
   };
   var url =
-    "https://api.airtable.com/v0/" + argumentos.baseid + "/" + argumentos.table;
+    "https://api.airtable.com/v0/" + request.baseid + "/" + request.table;
 
-  if (argumentos.hasOwnProperty("get")) {
-    if (argumentos.get.hasOwnProperty("id")) {
-      url = url + "/" + encodeURI(argumentos.get.id);
-    } else if (Object.keys(argumentos.get).length > 0) {
-      url = url + "?" + componerQueryURL(argumentos.get);
+  if (request.hasOwnProperty("get")) {
+    if (request.get.hasOwnProperty("id")) {
+      url = url + "/" + encodeURI(request.get.id);
+    } else if (Object.keys(request.get).length > 0) {
+      url = url + "?" + componerQueryURL(request.get);
     }
-  } else if (argumentos.hasOwnProperty("post")) {
+  } else if (request.hasOwnProperty("post")) {
     options.method = "post";
-    options.fields = argumentos.post;
-  } else if (argumentos.hasOwnProperty("patch")) {
+    options.headers["Content-Type"] = "application/json";
+    options.payload = JSON.stringify({ fields: request.post });
+  } else if (request.hasOwnProperty("patch")) {
     options.method = "patch";
-    options.fields = argumentos.patch;
-  } else if (argumentos.hasOwnProperty("delete")) {
+    options.headers["Content-Type"] = "application/json";
+    options.payload.fields = request.patch;
+  } else if (request.hasOwnProperty("delete")) {
     options.method = "delete";
     //GAS entiende delete como operador (?) asi q esto:
-    url = url + "/" + encodeURI(argumentos['delete'].id);
+    url = url + "/" + encodeURI(request["delete"].id);
   }
 
-  return JSON.parse(UrlFetchApp.fetch(url, options));
+  var response = JSON.parse(UrlFetchApp.fetch(url, options));
+  if (response.hasOwnProperty("error")) {
+    response.requestPeticionata = request;
+    response.requestEmitida = UrlFetchApp.getRequest(url, options);
+  }
+  return response;
 }
