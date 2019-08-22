@@ -1,7 +1,7 @@
 function doPost(e) {
   var data = JSON.parse(e.postData.contents);
   
-  const loadedServices = ["airtable", "tarjetasMercadoPago"];
+  const loadedServices = ["airtable", "tarjetasMercadoPago", "mapJSON"];
   var responses = [];
   for (const i of data.services) {
     const service = data.services[i]
