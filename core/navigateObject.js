@@ -1,8 +1,12 @@
-//a diferencia de eval, esta funcion navega por arrays tanto como objetos
+//toma un objeto o array y devuelve el valor de la ruta (string)
+//si se añade [i] al final de una propiedad que es un array, itinera el resto del path
 function navigateObject(obj, path) {
-  //takes an object and a path (string) and returns the value of the key at that path
-  for (var i = 0, keys = path.split("."), len = keys.length; i < len; i++) {
-    obj = obj[keys[i]];
+  var arraysToItinerate = path.split(/\[i\](.+)/);
+  obj = eval("obj." + arraysToItinerate[0]);
+  if (arraysToItinerate.length > 1) {
+    for (var i in obj) {
+      obj[i] = navigateObject(obj[i], arraysToItinerate[1].substr(1));
+    }
   }
-  return obj;
+return obj
 }
