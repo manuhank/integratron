@@ -12,7 +12,7 @@ function airtable(request) {
     if (request.get.hasOwnProperty("id")) {
       url = url + "/" + encodeURI(request.get.id);
     } else if (Object.keys(request.get).length > 0) {
-      url = url + "?" + componerQueryURL(request.get);
+      url = url + "?" + composeQueryURL(request.get);
     }
   } else if (request.hasOwnProperty("post")) {
     options.method = "post";
@@ -21,16 +21,18 @@ function airtable(request) {
   } else if (request.hasOwnProperty("patch")) {
     options.method = "patch";
     options.headers["Content-Type"] = "application/json";
-    options.payload.fields = request.patch;
+    url = url + "/" + encodeURI(request.patch["$id"]);
+    delete request.patch["$id"];
+    options.payload = JSON.stringify({ fields: request.patch });
   } else if (request.hasOwnProperty("delete")) {
     options.method = "delete";
     //GAS entiende delete como operador (?) asi q esto:
-    url = url + "/" + encodeURI(request["delete"].id);
+    url = url + "/" + encodeURI(request["delete"]);
   }
 
   var response = JSON.parse(UrlFetchApp.fetch(url, options));
   if (response.hasOwnProperty("error")) {
-    response.requestPeticionata = request;
+    response.requestPeticionada = request;
     response.requestEmitida = UrlFetchApp.getRequest(url, options);
   }
   return response;
