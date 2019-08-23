@@ -1,4 +1,4 @@
-const loadedServices = {
+var loadedServices = {
   airtable: {},
   tarjetasMercadoPago: {},
   mapJSON: {},

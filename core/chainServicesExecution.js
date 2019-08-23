@@ -5,13 +5,13 @@ function chainServicesExecution(services, requests, responses) {
   if (!responses) {
     responses = [];
   }
-  for (i = 0; i < data.services.length; i++) {
+  for (i = 0; i < services.length; i++) {
     var service = services[i];
     var request = requests[i];
     if (loadedServices.hasOwnProperty(service)) {
       responses.push(this[service](parseReferences(request, responses)));
     } else {
-      return crearJSON(errors.noService(service));
+      return errors.noService(service);
     }
   }
   return responses;

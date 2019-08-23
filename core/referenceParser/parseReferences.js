@@ -7,7 +7,8 @@ function parseReferences(request, arrayOfPreviousResponses) {
       //toda referencia es un objeto
       typeof request[key] === "object" &&
       //no debe ser un commando (los comandos de referencia son propiedad internas)
-      key.substr(0, commandPrefix.length) != commandPrefix
+      key !== syntax.requests &&
+      key !== syntax.services
     ) {
       ///__instance indica la response en la cadena a la que se hace referencia
       if (request[key].hasOwnProperty(syntax.instance)) {

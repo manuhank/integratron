@@ -12,7 +12,7 @@ function airtable(request) {
     if (request.get.hasOwnProperty("id")) {
       url = url + "/" + encodeURI(request.get.id);
     } else if (Object.keys(request.get).length > 0) {
-      url = url + "?" + componerQueryURL(request.get);
+      url = url + "?" + composeQueryURL(request.get);
     }
   } else if (request.hasOwnProperty("post")) {
     options.method = "post";

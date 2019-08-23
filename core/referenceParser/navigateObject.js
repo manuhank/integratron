@@ -5,7 +5,7 @@ function navigateObject(path, obj) {
   obj = eval("obj." + arraysToItinerate[0]);
   if (arraysToItinerate.length > 1) {
     for (var i in obj) {
-      obj[i] = navigateObject(obj[i], arraysToItinerate[1].substr(1));
+      obj[i] = navigateObject( arraysToItinerate[1].substr(1),obj[i]);
     }
   }
 return obj
