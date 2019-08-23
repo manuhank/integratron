@@ -5,10 +5,10 @@ function chainServicesExecution(services, requests) {
   for (i = 0; i < data.services.length; i++) {
     var service = services[i];
     var request = requests[i];
-    if (loadedServices.indexOf(service) < 0) {
-      return crearJSON(errors.noService(service));
-    } else {
+    if (loadedServices.hasOwnProperty(service)) {
       responses.push(this[service](parseReferences(request, responses)));
+    } else {
+      return crearJSON(errors.noService(service));
     }
   }
   return responses;
