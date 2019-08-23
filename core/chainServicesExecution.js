@@ -1,7 +1,10 @@
 //services must be an array of strings
 //request must be an array of objects
-function chainServicesExecution(services, requests) {
-  var responses = [];
+//optionally, it posible to pass an array of previous responses
+function chainServicesExecution(services, requests, responses) {
+  if (!responses) {
+    responses = [];
+  }
   for (i = 0; i < data.services.length; i++) {
     var service = services[i];
     var request = requests[i];

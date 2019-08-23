@@ -1,11 +1,12 @@
-function repeat(obj){
-    var responses = []
-    var origin = obj.origin;
-    origin.forEach(function(element) {
-        var chain = chainServicesExecution(data.services, data.requests)
-    responses.push(chain[chain.length - 1])
-    });
-    
+function repeat(request) {
+  var responses = [];
+  var origin = request[commandPrefix + "array"];
+  origin.forEach(function(object) {
+    var initResponses = []
+    initResponses[syntax.array] = object
+    var chain = chainServicesExecution(request[syntax.services], request[syntax.requests], initResponses);
+    responses.push(chain[chain.length - 1]);
+  });
+
   return responses;
-    // var 
 }
