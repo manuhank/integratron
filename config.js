@@ -1,1 +1,0 @@
-const loadedServices = ["airtable", "tarjetasMercadoPago", "mapJSON", "debug"];

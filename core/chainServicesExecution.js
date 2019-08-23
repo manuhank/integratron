@@ -6,9 +6,9 @@ function chainServicesExecution(services, requests) {
     var service = services[i];
     var request = requests[i];
     if (loadedServices.indexOf(service) < 0) {
-      return crearJSON(noService(service));
+      return crearJSON(errors.noService(service));
     } else {
-      responses.push(this[service](composeRequest(request, responses)));
+      responses.push(this[service](parseReferences(request, responses)));
     }
   }
   return responses;

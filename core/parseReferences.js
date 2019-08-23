@@ -1,4 +1,4 @@
-function composeRequest(request, arrayOfPreviousResponses) {
+function parseReferences(request, arrayOfPreviousResponses) {
   request = objMapParser(request);
   for (var key in request) {
     if (typeof request[key] === "object") {
@@ -8,7 +8,7 @@ function composeRequest(request, arrayOfPreviousResponses) {
           request[key]._path
         );
       } else {
-        request[key] = composeRequest(request[key], arrayOfPreviousResponses);
+        request[key] = parseReferences(request[key], arrayOfPreviousResponses);
       }
     }
   }
