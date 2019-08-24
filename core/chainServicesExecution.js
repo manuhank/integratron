@@ -8,7 +8,7 @@ function chainServicesExecution(services, requests, responses) {
   for (i = 0; i < services.length; i++) {
     var service = services[i];
     var request = requests[i];
-    if (loadedServices.hasOwnProperty(service)) {
+    if (loadPlugins().hasOwnProperty(service)) {
       responses.push(this[service](parseReferences(request, responses)));
     } else {
       return errors.noService(service);

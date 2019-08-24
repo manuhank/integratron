@@ -1,0 +1,4 @@
+var plugins = {
+  airtable: {},
+  tarjetasMercadoPago: {},
+};
