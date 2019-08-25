@@ -21,12 +21,12 @@ function airtable(request) {
   } else if (request.hasOwnProperty("patch")) {
     options.method = "patch";
     options.headers["Content-Type"] = "application/json";
-    url = url + "/" + encodeURI(request.patch["$id"]);
-    delete request.patch["$id"];
+    url = url + "/" + encodeURI(request.patch["id"]);
+    delete request.patch["id"];
     options.payload = JSON.stringify({ fields: request.patch });
   } else if (request.hasOwnProperty("delete")) {
     options.method = "delete";
-    //GAS entiende delete como operador (?) asi q esto:
+    //GAS entiende delete como operador asi q esto:
     url = url + "/" + encodeURI(request["delete"]);
   }
 
