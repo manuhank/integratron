@@ -1,12 +1,12 @@
 function conditional(request){
     var condition = request.condition
-    var results = request.results
+    var veredicts = request.veredicts
     var variables = {}
     request.hasOwnProperty('variables')? variables = request.variables: ''
     if(eval(condition)){
-        return results[1]
+        return veredicts[1]
     } else {
-        return results[0]
+        return veredicts[0]
     }
     
 }
