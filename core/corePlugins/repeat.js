@@ -1,11 +1,10 @@
-function repeat(request) {
+function repeat(request, responsesThread) {
   var responses = [];
   var origin = request[syntax.array];
   for (var key in origin) {
-    var initResponses = []
-    initResponses[syntax.array] = origin[key]
-    var chain = chainServicesExecution(request[syntax.services], request[syntax.requests], initResponses);
-    responses.push(chain[chain.length - 1]);
+    var itinerationResponses = []
+    runThreadOfServices(request[syntax.services],request[syntax.requests], responsesThread, itinerationResponses);
+    responses.push(itinerationResponses[itinerationResponses.length - 1]);
   };
 
   return responses;
