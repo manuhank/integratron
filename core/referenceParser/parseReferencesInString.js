@@ -1,5 +1,5 @@
 function parseReferencesInString(string, arrayOfPreviousResponses) {
-  var reg = /\$\{(\d.+?)\}/gi;
+  var reg = /\$\{(\d.*?)\}/gi;
   var matches = string.match(reg);
   if (matches) {
     var howManyMatches = matches.length;

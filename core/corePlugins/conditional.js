@@ -2,12 +2,12 @@ function conditional(request, arrayOfPreviousResponses) {
   for (var i in request) {
     var condition;
     if (i === "else") {
-      condition = "true";
+      condition = true;
     } else {
       condition = parseReferencesInString(i, arrayOfPreviousResponses);
     }
     try {
-      if (eval(condition)) {
+      if (condition === true || eval(condition)) {
         if (
           typeof request[i] === "object" &&
           request[i].hasOwnProperty(syntax.services) &&
