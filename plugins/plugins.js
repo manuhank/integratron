@@ -1,5 +1,5 @@
 var plugins = {
   airtable: {},
   tarjetasMercadoPago: {},
-  validateEmail : {}
+  validateEmail: {}
 };
