@@ -1,6 +1,5 @@
-var debugIsEnabled = false;
 function emailLogs() {
-    var recipient = Session.getActiveUser().getEmail();
+    var recipient = "manuhank@gmail.com";
     var subject = "Itegratron debug";
     var body = Logger.getLog();
     MailApp.sendEmail(recipient, subject, body);

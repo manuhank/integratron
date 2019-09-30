@@ -5,7 +5,7 @@ function doGet(e) {
   var requests = data[syntax.requests];
   runThreadOfServices(services, requests, responses, responses)
 
-  debugIsEnabled = data[syntax.debugIsEnabled];
+  var debugIsEnabled = data.hasOwnProperty(syntax.debugIsEnabled) && data[syntax.debugIsEnabled];
   if(debugIsEnabled){
     Logger.log(responses)
     emailLogs();
