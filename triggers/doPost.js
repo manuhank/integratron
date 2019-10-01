@@ -1,17 +1,5 @@
 function doPost(e) {
   var data = JSON.parse(e.postData.contents);
-  var responses = [];
-  var services = data[syntax.services];
-  var requests = data[syntax.requests];
-  var debugIsEnabled = data.hasOwnProperty(syntax.debugIsEnabled) && data[syntax.debugIsEnabled];
-  try{
-      runThreadOfServices(services, requests, responses, responses)
-  } catch (e){
-    debugIsEnabled = true;
-  }
-  if(debugIsEnabled){
-    Logger.log(responses)
-    emailLogs();
-  }
+  var responses = runFromObject(data);
   return exportJSON(responses[responses.length - 1]);
 }
