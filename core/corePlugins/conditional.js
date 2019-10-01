@@ -1,3 +1,4 @@
+//toma la primer condicion verdadera
 function conditional(request, arrayOfPreviousResponses) {
   for (var i in request) {
     var condition;
@@ -31,7 +32,8 @@ function conditional(request, arrayOfPreviousResponses) {
         } else return request[i];
       }
     } catch (error) {
-      return { error: error, condition: condition };
+      Logger.log(error)
+      throw error;
     }
   }
   return false;
