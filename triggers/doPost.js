@@ -3,8 +3,12 @@ function doPost(e) {
   var responses = [];
   var services = data[syntax.services];
   var requests = data[syntax.requests];
-  runThreadOfServices(services, requests, responses, responses)
   var debugIsEnabled = data.hasOwnProperty(syntax.debugIsEnabled) && data[syntax.debugIsEnabled];
+  try{
+      runThreadOfServices(services, requests, responses, responses)
+  } catch (e){
+    debugIsEnabled = true;
+  }
   if(debugIsEnabled){
     Logger.log(responses)
     emailLogs();
