@@ -10,7 +10,7 @@ function runService(service, request, responsesThread) {
       responsesThread
     );
     } catch (error){
-      return error
+      throw error
     }
   } else {
     return errors.noService(service);
